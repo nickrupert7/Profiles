@@ -1,0 +1,4 @@
+#!/bin/sh
+source "$(git --exec-path)/git-sh-setup"
+git remote prune origin
+git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D

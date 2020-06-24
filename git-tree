@@ -1,0 +1,3 @@
+#!/bin/sh
+source "$(git --exec-path)/git-sh-setup"
+git log --graph --oneline --all
