@@ -1,4 +1,9 @@
-- php.ini memory_limit=-1
-- System preferences? (reverse scrolling, touch bar, dark mode, etc)
-- Custom git programs (git update, etc)
-- Postman
+- System preferences
+  - reverse scrolling
+  - power settings
+  - screen saver time
+  - mission control automatically rearrange
+  - Dock apps
+- Node/NPM
+- Global Packages
+  - Laravel
