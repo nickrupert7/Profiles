@@ -24,6 +24,8 @@ brew install php
 ########################################
 milestone "UPDATE PHP INI"
 INI_FILE=$(php --ini | grep "Loaded Configuration File" | awk '{print $4}')
+# Set php memory_limit to -1 (unlimited)
+# This is important for preventing errors during `composer install` in some projects
 sed -i '' 's/memory_limit =.*/memory_limit = -1/g' $INI_FILE
 
 ########################################
@@ -54,7 +56,7 @@ wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/.bash_profile
 # INSTALL NANO
 ########################################
 milestone "GET NANO PROFILE"
-wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/.nanorc ~/.nanorc
+wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/.nanorc -O ~/.nanorc
 
 ########################################
 # CONFIGURE GIT
@@ -83,14 +85,14 @@ mkdir ~/.ssh
 ssh-keygen -f ~/.ssh/github.id_rsa -N ""
 ssh-keygen -f ~/.ssh/bitbucket.id_rsa -N ""
 ssh-keygen -f ~/.ssh/home.nickrupert.id_rsa -N ""
-wget #TODO/config -P ~/.ssh
+#TODO wget ssh-config -O ~/.ssh/config
 
 ########################################
 # CREATE DEVELOPER DIRECTORY
 ########################################
 milestone "CREATE DEVELOPER DIRECTORY"
 mkdir ~/Developer
-# TODO Add To Terminal Quick Access Panel
+# TODO Add To Finder Quick Access Panel
 
 ########################################
 # INSTALL GOOGLE CHROME
