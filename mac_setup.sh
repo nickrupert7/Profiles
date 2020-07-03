@@ -29,6 +29,31 @@ INI_FILE=$(php --ini | grep "Loaded Configuration File" | awk '{print $4}')
 sed -i '' 's/memory_limit =.*/memory_limit = -1/g' $INI_FILE
 
 ########################################
+# INSTALL COMPOSER
+########################################
+milestone "INSTALL COMPOSER"
+EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+
+if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]
+then
+    >&2 echo 'ERROR: Invalid installer checksum'
+    rm composer-setup.php
+    exit 1
+fi
+
+php composer-setup.php --quiet
+rm composer-setup.php
+mv composer.phar /usr/local/bin/composer
+
+########################################
+# INSTALL LARAVEL
+########################################
+milestone "INSTALL LARAVEL"
+composer global require laravel/installer
+
+########################################
 # INSTALL GIT
 ########################################
 milestone "INSTALL GIT"
