@@ -49,6 +49,14 @@ function installGit {
 }
 
 ########################################
+# CREATE KEYS
+########################################
+function createKeys {
+	milestone "CREATE KEYS"
+	
+}
+
+########################################
 # INSTALL SPOTIFY
 ########################################
 function installSpotify {
@@ -97,6 +105,7 @@ function setDefaultApps {
 #aptUpdate
 #installFlatpak
 #installGit
+createKeys
 #installChrome
 #installChromeRemoteDesktop
 #installSpotify

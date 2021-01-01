@@ -1,6 +1,7 @@
 [user]
 	name = Nick Rupert
 	email = nickrupert7@gmail.com
-
 [includeIf "gitdir:~/Developer/Helium/"]
 	path = ~/Developer/Helium/.gitconfig
+[credential]
+	helper = cache
