@@ -4,4 +4,4 @@
 [includeIf "gitdir:~/Developer/Helium/"]
 	path = ~/Developer/Helium/.gitconfig
 [credential]
-	helper = cache
+	helper = store --file ~/.git-credentials
