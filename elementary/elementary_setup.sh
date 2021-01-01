@@ -41,10 +41,7 @@ function installFlatpak {
 	sudo apt install flatpak -y
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-	# Add Flathub repository to AppCenter by opening flathub reference file
-	wget https://dl.flathub.org/repo/appstream/com.spotify.Client.flatpakref -P ~/Downloads
-	timeout 60s /usr/bin/io.elementary.appcenter ~/Downloads/com.spotify.Client.flatpakref
-	rm ~/Downloads/com.spotify.Client.flatpakref
+	#TODO: Add Flathub to AppCenter
 }
 
 ########################################
@@ -73,6 +70,19 @@ function installChrome {
 	echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 	sudo apt update
 	sudo apt install brave-browser -y
+}
+
+########################################
+# INSTALL CHROME REMOTE DESKTOP
+########################################
+function installChromeRemoteDesktop {
+	milestone "INSTALL CHROME REMOTE DESKTOP"
+	wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb -P /tmp
+	sudo apt install /tmp/chrome-remote-desktop_current_amd64.deb
+	/opt/google/chrome-remote-desktop/chrome-remote-desktop --stop
+	sudo  mv /opt/google/chrome-remote-desktop/chrome-remote-desktop /opt/google/chrome-remote-desktop/chrome-remote-desktop.orig
+	
+	/opt/google/chrome-remote-desktop/chrome-remote-desktop --start
 }
 
 ########################################
