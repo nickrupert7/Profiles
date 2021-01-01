@@ -23,13 +23,6 @@ function aptUpdate {
 	sudo apt update
 }
 
-########################################
-# CREATE DEVELOPER DIRECTORY
-########################################
-function createDeveloperDirectory {
-	milestone "CREATE DEVELOPER DIRECTORY"
-	mkdir ~/Developer
-}
 
 ########################################
 # INSTALL FLATPAK
@@ -48,7 +41,11 @@ function installFlatpak {
 # INSTALL GIT
 ########################################
 function installGit {
+	milestone "INSTALL GIT"
 	sudo apt install git -y
+	mkdir -p ~/Developer/Helium
+	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/.gitconfig -P ~
+	wget -O ~/Developer/Helium/.gitconfig https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/.gitconfig-helium
 }
 
 ########################################
@@ -81,8 +78,17 @@ function installChromeRemoteDesktop {
 	sudo apt install /tmp/chrome-remote-desktop_current_amd64.deb
 	/opt/google/chrome-remote-desktop/chrome-remote-desktop --stop
 	sudo  mv /opt/google/chrome-remote-desktop/chrome-remote-desktop /opt/google/chrome-remote-desktop/chrome-remote-desktop.orig
-	
+	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/chrome-remote-desktop -P /opt/google/chrome-remote-desktop
 	/opt/google/chrome-remote-desktop/chrome-remote-desktop --start
+	brave-browser-stable https://remotedesktop.google.com/access
+}
+
+########################################
+# SET DEFAULT APPS
+########################################
+function setDefaultApps {
+	milestone "SET APP DEFAULTS"
+	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/mimeapps.list -P ~/.config
 }
 
 ########################################
@@ -91,5 +97,7 @@ function installChromeRemoteDesktop {
 #aptUpdate
 #installFlatpak
 #installGit
+#installChrome
+#installChromeRemoteDesktop
 #installSpotify
-installChrome
+#setDefaultApps
