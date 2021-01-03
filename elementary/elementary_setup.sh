@@ -79,8 +79,7 @@ function installGit {
 ########################################
 function createKeys {
 	milestone "CREATE KEYS"
-	brave-browser-stable https://github.com/settings/tokens --no-sandbox
-	(bash github_pat.sh &) 2>/dev/null
+	(bash github_pat.sh github.com https://github.com/settings/tokens &) 2>/dev/null
 }
 
 ########################################
