@@ -5,3 +5,5 @@
 	path = ~/Developer/Helium/.gitconfig
 [credential]
 	helper = store --file ~/.git-credentials
+[core]
+	editor = nano
