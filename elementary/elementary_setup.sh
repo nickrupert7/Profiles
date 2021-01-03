@@ -80,6 +80,41 @@ function installGit {
 function createKeys {
 	milestone "CREATE KEYS"
 	(bash github_pat.sh github.com https://github.com/settings/tokens &) 2>/dev/null
+
+	#TODO: Create SSH Keys
+}
+
+########################################
+# INSTALL PHP
+########################################
+function installPhp {
+	#See https://www.tecmint.com/install-different-php-versions-in-ubuntu/
+	milestone "INSTALL PHP"
+	sudo add-apt-repository ppa:ondrej/php -y
+	sudo apt install php7.4 -y
+	sudo apt install php8.0 -y
+	#sudo update-alternatives --set php /usr/bin/php8.0
+
+	sudo apt install php7.4-mbstring
+	sudo apt install php8.0-mbstring
+	sudo apt install php7.4-curl
+	sudo apt install php8.0-curl
+	sudo apt install php7.4-dom
+	sudo apt install php8.0-dom
+	#TODO: Other extensions?
+
+	#TODO: ini files
+}
+
+########################################
+# INSTALL COMPOSER
+########################################
+function installComposer {
+	php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+	php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+	php composer-setup.php
+	php -r "unlink('composer-setup.php');"
+	sudo mv composer.phar /usr/local/bin/composer
 }
 
 ########################################
@@ -97,6 +132,7 @@ function installSpotify {
 function setDefaultApps {
 	milestone "SET APP DEFAULTS"
 	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/mimeapps.list -P ~/.config
+	#TODO
 }
 
 ########################################
@@ -107,6 +143,8 @@ function setDefaultApps {
 #installChrome
 #installChromeRemoteDesktop
 #installGit
-createKeys
+#createKeys
 #setDefaultApps
 #installSpotify
+#installPhp
+#installComposer
