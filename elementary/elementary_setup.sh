@@ -40,7 +40,7 @@ function installProfiles {
 ########################################
 function installFlatpak {
 	milestone "INSTALL FLATPAK"
-	add-apt-repository ppa:alexlarson/flatpak
+	add-apt-repository ppa:alexlarson/flatpak -y
 	apt update
 	apt install flatpak -y
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -146,11 +146,15 @@ function installComposer {
 }
 
 ########################################
-# INSTALL DOCKER DESKTOP
+# INSTALL DOCKER
 ########################################
-function installDockerDesktop {
-	milestone "INSTALL DOCKER DESKTOP"
-	#TODO
+function installDocker {
+	milestone "INSTALL DOCKER"
+	sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -csu) stable" -y
+	sudo apt update
+	sudo apt install docker-ce docker-ce-cli containerd.io -y
 }
 
 ########################################
@@ -182,7 +186,9 @@ function installPostman {
 ########################################
 function installAndroidMessages {
 	milestone "INSTALL ANDROID MESSAGES"
-	#TODO
+	URL=$(curl -s https://api.github.com/repos/chrisknepper/android-messages-desktop/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep .deb | head -n 1)
+	wget $URL -O /tmp/android_messages.deb
+	sudo apt install /tmp/android_messages.deb -y
 }
 
 ########################################
@@ -225,12 +231,12 @@ function setPreferences {
 #createKeys
 #installPhp
 #installComposer
-##installDockerDesktop
-installAtom
-installPhpStorm
-installPostman
-##installAndroidMessages
-installSlack
+#installDocker
+#installAtom
+#installPhpStorm
+#installPostman
+#installAndroidMessages
+#installSlack
 #installSpotify
 #setPreferences
-#milestone $'FINISHED\nWhen you are ready, plese restart your computer for configuration settings to take effect'
+#milestone $'FINISHED\nWhen you are ready, plese restart your computer\nfor configuration settings to take effect'
