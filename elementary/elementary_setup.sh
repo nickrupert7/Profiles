@@ -38,34 +38,6 @@ function installFlatpak {
 }
 
 ########################################
-# INSTALL GIT
-########################################
-function installGit {
-	milestone "INSTALL GIT"
-	sudo apt install git -y
-	mkdir -p ~/Developer/Helium
-	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/.gitconfig -P ~
-	wget -O ~/Developer/Helium/.gitconfig https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/.gitconfig-helium
-}
-
-########################################
-# CREATE KEYS
-########################################
-function createKeys {
-	milestone "CREATE KEYS"
-	
-}
-
-########################################
-# INSTALL SPOTIFY
-########################################
-function installSpotify {
-	milestone "INSTALL SPOTIFY"
-	addHost "54.230.53.147" "repository.spotify.com"
-	flatpak install https://dl.flathub.org/repo/appstream/com.spotify.Client.flatpakref -y
-}
-
-########################################
 # INSTALL BRAVE (CHROMIUM BROWSER)
 ########################################
 function installChrome {
@@ -92,6 +64,35 @@ function installChromeRemoteDesktop {
 }
 
 ########################################
+# INSTALL GIT
+########################################
+function installGit {
+	milestone "INSTALL GIT"
+	sudo apt install git -y
+	mkdir -p ~/Developer/Helium
+	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/.gitconfig -P ~
+	wget -O ~/Developer/Helium/.gitconfig https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/.gitconfig-helium
+}
+
+########################################
+# CREATE KEYS
+########################################
+function createKeys {
+	milestone "CREATE KEYS"
+	brave-browser-stable https://github.com/settings/tokens --no-sandbox
+	(bash github_pat.sh &) 2>/dev/null
+}
+
+########################################
+# INSTALL SPOTIFY
+########################################
+function installSpotify {
+	milestone "INSTALL SPOTIFY"
+	addHost "54.230.53.147" "repository.spotify.com"
+	flatpak install https://dl.flathub.org/repo/appstream/com.spotify.Client.flatpakref -y
+}
+
+########################################
 # SET DEFAULT APPS
 ########################################
 function setDefaultApps {
@@ -104,9 +105,9 @@ function setDefaultApps {
 ########################################
 #aptUpdate
 #installFlatpak
-#installGit
-createKeys
 #installChrome
 #installChromeRemoteDesktop
-#installSpotify
+#installGit
+createKeys
 #setDefaultApps
+#installSpotify
