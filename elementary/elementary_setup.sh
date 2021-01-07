@@ -219,14 +219,15 @@ function installSpotify {
 # SET PREFERENCES
 ########################################
 function setPreferences {
-	milestone "SET APP DEFAULTS"
+	milestone "SET PREFERENCES"
+	#TODO: Finish mimeapps.list
 	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/mimeapps.list -P ~/.config
 	chown nick:nick ~/.config/mimeapps.list
 	gsettings set io.elementary.desktop.wingpanel.datetime clock-show-seconds true
 	gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
 	# Set Dock Applications
-	# Whena adding items in the future, it is important to add each launch
+	# When adding items in the future, it is important to add each launch
   # in the order it should appear in the Dock
 	mkdir /tmp/launchers
 	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/launchers/io.elementary.files.dockitem -P /tmp/launchers
@@ -241,6 +242,8 @@ function setPreferences {
 	su - nick -c "nohup plank &"
 
 	# Remap Super Key
+	gsettings set org.gnome.mutter overlay-key ''
+	gsettings set org.pantheon.desktop.gala.behavior overlay-action ''
 	snap install ksuperkey
 	ksuperkey -e 'Super_L=Super_L|Down'
 }
