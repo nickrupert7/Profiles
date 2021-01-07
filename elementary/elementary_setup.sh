@@ -36,6 +36,13 @@ function installProfiles {
 }
 
 ########################################
+# INSTALL SNAP
+########################################
+function installSnap {
+	apt install snapd -y
+}
+
+########################################
 # INSTALL FLATPAK
 ########################################
 function installFlatpak {
@@ -218,6 +225,9 @@ function setPreferences {
 	gsettings set io.elementary.desktop.wingpanel.datetime clock-show-seconds true
 	gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
+	# Set Dock Applications
+	# Whena adding items in the future, it is important to add each launch
+  # in the order it should appear in the Dock
 	mkdir /tmp/launchers
 	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/launchers/io.elementary.files.dockitem -P /tmp/launchers
 	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/launchers/brave-browser.dockitem -P /tmp/launchers
@@ -228,7 +238,11 @@ function setPreferences {
 	mv /tmp/launchers ~/.config/plank/dock1
 	chown -R nick:nick ~/.config/plank/dock1/launchers
 	killall plank
-	nohup plank &
+	su - nick -c "nohup plank &"
+
+	# Remap Super Key
+	snap install ksuperkey
+	ksuperkey -e 'Super_L=Super_L|Down'
 }
 
 ########################################
@@ -236,6 +250,7 @@ function setPreferences {
 ########################################
 #aptUpdate
 #installProfiles
+#installSnap
 #installFlatpak
 #installChrome
 #installChromeRemoteDesktop
