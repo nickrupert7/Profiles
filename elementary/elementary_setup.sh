@@ -249,6 +249,6 @@ function setPreferences {
 #installPostman
 #installAndroidMessages
 #installSlack
-installSpotify
-#setPreferences
+#installSpotify
+setPreferences
 #milestone $'FINISHED\nWhen you are ready, plese restart your computer\nfor configuration settings to take effect'

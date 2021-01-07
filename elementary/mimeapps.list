@@ -1,5 +1,6 @@
 [Added Associations]
 application/vnd.flatpak.ref=io.elementary.appcenter.desktop;
+application/x-shellscript=open-pantheon-terminal-here.desktop;
 
 [Default Applications]
 application/vnd.flatpak.ref=io.elementary.appcenter.desktop
