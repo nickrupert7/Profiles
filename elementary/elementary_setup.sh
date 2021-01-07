@@ -215,8 +215,20 @@ function setPreferences {
 	milestone "SET APP DEFAULTS"
 	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/mimeapps.list -P ~/.config
 	chown nick:nick ~/.config/mimeapps.list
+	gsettings set io.elementary.desktop.wingpanel.datetime clock-show-seconds true
+	gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
-	#TODO
+	mkdir /tmp/launchers
+	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/launchers/io.elementary.files.dockitem -P /tmp/launchers
+	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/launchers/brave-browser.dockitem -P /tmp/launchers
+	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/launchers/org.pantheon.mail.dockitem -P /tmp/launchers
+	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/launchers/com.spotify.Client.dockitem -P /tmp/launchers
+	wget https://raw.githubusercontent.com/nickrupert7/Profiles/master/elementary/launchers/io.elementary.terminal.dockitem -P /tmp/launchers
+	rm -rf ~/.config/plank/dock1/launchers
+	mv /tmp/launchers ~/.config/plank/dock1
+	chown -R nick:nick ~/.config/plank/dock1/launchers
+	killall plank
+	nohup plank &
 }
 
 ########################################
@@ -237,6 +249,6 @@ function setPreferences {
 #installPostman
 #installAndroidMessages
 #installSlack
-#installSpotify
+installSpotify
 #setPreferences
 #milestone $'FINISHED\nWhen you are ready, plese restart your computer\nfor configuration settings to take effect'
