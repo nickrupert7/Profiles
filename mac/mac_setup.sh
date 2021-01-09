@@ -201,9 +201,9 @@ open -a "App Store.app" https://itunes.apple.com/app/slack/id803453959
 # milestone "INSTALL LIGHTHOUSE"
 # TODO
 
-########################################
-# CONFIGURE SYSTEM PREFERENCES
-########################################
+#######################################
+CONFIGURE SYSTEM PREFERENCES
+#######################################
 milestone "CONFIGURE SYSTEM PREFERENCES"
 # Enable Dark Mode
 osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to 1'
@@ -232,7 +232,7 @@ defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm:ss 
 defaults write com.apple.menuextra.battery ShowPercent YES
 
 # Clear Dock apps
-defaults delete com.apple.dock persistent-apps
+# defaults delete com.apple.dock persistent-apps
 
 # Add Google Chrome, Mail, Spotify, PhpStorm, Terminal, Slack, Android Messages, and Stickies to Dock
 defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Chrome.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
